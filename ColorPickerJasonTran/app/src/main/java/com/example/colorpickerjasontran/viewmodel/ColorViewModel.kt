@@ -1,66 +1,63 @@
 package com.example.colorpickerjasontran.viewmodel
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
-class ColorViewModel : ViewModel() {
-    // LiveData for RGB values
-    private val _red = MutableLiveData<Float>(0.5f)  // Initial value set to 0.5
+class ColorViewModel(application: Application) : AndroidViewModel(application) {
+    private val sharedPreferences: SharedPreferences = application.getSharedPreferences("color_prefs", Context.MODE_PRIVATE)
+
+    private val _red = MutableLiveData(sharedPreferences.getFloat("red", 0.5f))
     val red: LiveData<Float> = _red
 
-    private val _green = MutableLiveData<Float>(0.5f)  // Initial value set to 0.5
+    private val _green = MutableLiveData(sharedPreferences.getFloat("green", 0.5f))
     val green: LiveData<Float> = _green
 
-    private val _blue = MutableLiveData<Float>(0.5f)  // Initial value set to 0.5
+    private val _blue = MutableLiveData(sharedPreferences.getFloat("blue", 0.5f))
     val blue: LiveData<Float> = _blue
 
-    // LiveData for the state of switches
-    private val _redSwitchState = MutableLiveData<Boolean>(true)  // Initial switch state set to true
+    private val _redSwitchState = MutableLiveData(sharedPreferences.getBoolean("redSwitchState", true))
     val redSwitchState: LiveData<Boolean> = _redSwitchState
 
-    private val _greenSwitchState = MutableLiveData<Boolean>(true)  // Initial switch state set to true
+    private val _greenSwitchState = MutableLiveData(sharedPreferences.getBoolean("greenSwitchState", true))
     val greenSwitchState: LiveData<Boolean> = _greenSwitchState
 
-    private val _blueSwitchState = MutableLiveData<Boolean>(true)  // Initial switch state set to true
+    private val _blueSwitchState = MutableLiveData(sharedPreferences.getBoolean("blueSwitchState", true))
     val blueSwitchState: LiveData<Boolean> = _blueSwitchState
 
-    // Methods to update the color values
     fun setRed(value: Float) {
         _red.value = value
+        sharedPreferences.edit().putFloat("red", value).apply()
     }
 
     fun setGreen(value: Float) {
         _green.value = value
+        sharedPreferences.edit().putFloat("green", value).apply()
     }
 
     fun setBlue(value: Float) {
         _blue.value = value
+        sharedPreferences.edit().putFloat("blue", value).apply()
     }
 
-    // Methods to update the switch states
     fun setRedSwitch(state: Boolean) {
         _redSwitchState.value = state
-        if (!state) {
-            setRed(0f)  // If the switch is turned off, set color value to 0
-        }
+        sharedPreferences.edit().putBoolean("redSwitchState", state).apply()
     }
 
     fun setGreenSwitch(state: Boolean) {
         _greenSwitchState.value = state
-        if (!state) {
-            setGreen(0f)  // If the switch is turned off, set color value to 0
-        }
+        sharedPreferences.edit().putBoolean("greenSwitchState", state).apply()
     }
 
     fun setBlueSwitch(state: Boolean) {
         _blueSwitchState.value = state
-        if (!state) {
-            setBlue(0f)  // If the switch is turned off, set color value to 0
-        }
+        sharedPreferences.edit().putBoolean("blueSwitchState", state).apply()
     }
 
-    // Method to reset colors and switches to their default values
     fun resetColorsAndSwitches() {
         setRed(0.5f)
         setGreen(0.5f)
