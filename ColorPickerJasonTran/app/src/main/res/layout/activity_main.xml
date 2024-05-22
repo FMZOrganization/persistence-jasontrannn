@@ -11,13 +11,13 @@
         android:id="@+id/colorDisplay"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:background="#FFFFFF" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_weight="2"
         android:orientation="vertical">
 
         <!-- Red Controls -->
@@ -33,6 +33,17 @@
             android:layout_height="wrap_content"
             android:max="100"
             android:progress="50" />
+
+        <EditText
+            android:id="@+id/redInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="0.0 - 1.0"
+            android:maxLength="4"
+            android:text="0.5"
+            android:enabled="true"
+            android:padding="8dp"/>
 
         <Switch
             android:id="@+id/redSwitch"
@@ -56,6 +67,17 @@
             android:max="100"
             android:progress="50" />
 
+        <EditText
+            android:id="@+id/greenInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="0.0 - 1.0"
+            android:maxLength="4"
+            android:text="0.5"
+            android:enabled="true"
+            android:padding="8dp"/>
+
         <Switch
             android:id="@+id/greenSwitch"
             android:layout_width="wrap_content"
@@ -77,6 +99,17 @@
             android:layout_height="wrap_content"
             android:max="100"
             android:progress="50" />
+
+        <EditText
+            android:id="@+id/blueInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:hint="0.0 - 1.0"
+            android:maxLength="4"
+            android:text="0.5"
+            android:enabled="true"
+            android:padding="8dp"/>
 
         <Switch
             android:id="@+id/blueSwitch"
